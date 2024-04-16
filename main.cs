@@ -4,8 +4,9 @@ class Program {
   static string alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-+#$%&/()=¿?¡!|,.;:{}[]";
   public static void Main(){
       string msj = IngresarFrase();
+      int clave = IngresarClave();
       int opcion = 0;
-       while(true){
+       while (true) {
          Console.WriteLine("1. Cifrar");
          Console.WriteLine("2. Descifrar");
          Console.WriteLine("3. Cambiar frase");
@@ -13,11 +14,11 @@ class Program {
          Console.WriteLine("Elija una opcion");
          opcion = int.Parse(Console.ReadLine());
          if(opcion == 1){
-             string resultado = Cifrar(msj, 7);
+             string resultado = Cifrar(msj, clave);
              Console.WriteLine("El mensaje cifrado es: " + resultado);
          } 
          else if(opcion == 2){
-             string resultado = Descifrar(msj, 7);
+             string resultado = Descifrar(msj, clave);
              Console.WriteLine("El mensaje descifrado es: " + resultado);
          }
          else if(opcion == 3){ 
@@ -61,6 +62,21 @@ class Program {
     return true;
   }
 
+  public static int IngresarClave(){
+    int clave = 0;
+    while (clave == 0){
+        Console.WriteLine("Ingrese la clave");
+        try {
+            clave = int.Parse(Console.ReadLine());
+        }
+        catch {
+            continue;
+        }
+    }
+    
+    return clave;
+  }
+
   public static string Cifrar(string msj, int clave) {
       string msjCifrado = "";
 
@@ -98,7 +114,6 @@ class Program {
               return "-1"; 
           }
       }
-
       return msjDescifrado;
   }
 }
