@@ -3,14 +3,7 @@ using System;
 class Program {
   static string alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-+#$%&/()=¿?¡!|,.;:{}[]";
   public static void Main(){
-      Console.WriteLine("Ingrese la frase ");
-
-      string msj = Console.ReadLine();
-      while (string.IsNullOrEmpty(msj))
-      {
-          Console.WriteLine("Ingrese un mensaje no vacio");
-          msj = Console.ReadLine();
-      }
+      string msj = IngresarFrase();
       int opcion = 0;
        while(true){
          Console.WriteLine("1. Cifrar");
@@ -28,8 +21,7 @@ class Program {
              Console.WriteLine("El mensaje descifrado es: " + resultado);
          }
          else if(opcion == 3){ 
-             Console.WriteLine("Ingrese la frase ");
-             msj = Console.ReadLine();
+             msj = IngresarFrase();
          }
          else if(opcion == 4){
              break;
@@ -38,6 +30,35 @@ class Program {
              Console.WriteLine("Opcion no valida");
          }
        }
+  }
+
+  public static string IngresarFrase(){
+    string msj = "";
+
+    bool check = false;
+ 
+     while (!check) { 
+        Console.WriteLine("Ingrese la frase, acordate que no podes usar espacios ");
+        msj = Console.ReadLine();
+        if(string.IsNullOrEmpty(msj)){
+            Console.WriteLine("Ingrese un mensaje no vacio ");
+        } else if (!ValidarChar(msj)) {
+            Console.WriteLine("Ingrese un mensaje valido ");
+        } else {
+            check = true;    
+        }
+        
+    }
+    return msj;
+  }
+
+  public static bool ValidarChar(string msj){
+    foreach (char c in msj){
+        if(!alfabeto.Contains(c)){
+            return false;
+        } 
+    }
+    return true;
   }
 
   public static string Cifrar(string msj, int clave) {
